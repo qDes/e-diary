@@ -12,7 +12,7 @@ def fix_marks(name):
         mark.save()
 
 
-def delete_chastisement(name):
+def delete_chastisements(name):
     schoolkid = get_child(name)
     Chastisement.objects.filter(schoolkid=schoolkid).delete()
 
