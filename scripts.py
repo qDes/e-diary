@@ -37,7 +37,7 @@ def get_child(name):
 
 def create_commendation(name, lesson):
     commend = random.choice(get_commendation_texts(
-                            'commends_catalagoue.json'))
+                            'commendations_catalagoue.json'))
     child = get_child(name)
     if not child:
         return None
@@ -53,4 +53,4 @@ def create_commendation(name, lesson):
 
 
 if __name__ == "__main__":
-    commends = get_commendation_texts('commends_catalagoue.json')
+    commends = get_commendation_texts('commendations_catalagoue.json')
