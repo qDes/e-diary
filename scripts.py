@@ -25,7 +25,7 @@ def get_commendation_texts(filename):
 
 def get_child(name):
     try:
-        child = Schoolkid.objects.filter(full_name__contains=name).get()
+        child = Schoolkid.objects.get(full_name__contains=name)
     except ObjectDoesNotExist:
         print(f"There is no schoolkid with {name} name")
         return None
@@ -36,13 +36,15 @@ def get_child(name):
 
 
 def create_commendation(name, lesson):
-    commend = random.choice(get_commendation_texts('commend.json'))
+    commend = random.choice(get_commendation_texts(
+                            'commends_catalagoue.json'))
     child = get_child(name)
     if not child:
         return None
     last_lesson = Lesson.objects.filter(year_of_study=child.year_of_study,
                                         group_letter=child.group_letter,
-                                        subject__title=lesson).order_by('-date')[0]
+                                        subject__title=lesson
+                                        ).order_by('-date')[0]
     Commendation.objects.create(text=commend,
                                 created=last_lesson.date,
                                 schoolkid=child,
@@ -51,4 +53,4 @@ def create_commendation(name, lesson):
 
 
 if __name__ == "__main__":
-    commends = get_commendation_texts('commend.json')
+    commends = get_commendation_texts('commends_catalagoue.json')
